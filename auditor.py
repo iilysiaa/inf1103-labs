@@ -6,6 +6,7 @@ while True:
         item = input("Enter an inventory item (or type 'quit' to exit): ")
         if item.lower() == 'quit':
             print("Total Units in Inventory:", inventory, "Number of Failed/Rejected Entries:", error_count)
+            break
         quantity = int(input(f"Enter the quantity of {item}: "))
         if quantity < 0:
             print("Quantity cannot be negative. Please enter a valid number.")
