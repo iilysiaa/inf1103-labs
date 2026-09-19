@@ -1,24 +1,24 @@
 def get_valid_input():
     """
-    Prompts the user to enter a stock quantity.
+    Prompts the user for an item name and a stock quantity.
     Returns:
-        int    -> a valid, non-negative quantity
-        "quit" -> if the user wants to exit
-        None   -> if the entry was invalid (so the caller can count it as a failure)
+        (item, quantity) -> a valid item name and non-negative quantity
+        "quit"           -> if the user wants to exit
+        None             -> if the quantity entered was invalid (so the caller can count it as a failure)
     """
+    item = input("Enter an inventory item (or type 'quit' to exit): ")
+
+    if item.lower() == 'quit':
+        return "quit"
+
     try:
-        entry = input("Enter a stock quantity (or type 'quit' to exit): ")
-
-        if entry.lower() == 'quit':
-            return "quit"
-
-        quantity = int(entry)
+        quantity = int(input(f"Enter the quantity of {item}: "))
 
         if quantity < 0:
             print("Quantity cannot be negative. Please enter a valid number.")
             return None
 
-        return quantity
+        return item, quantity
 
     except ValueError:
         print("Please enter a valid number for quantity.")
@@ -59,10 +59,11 @@ def main():
             continue
 
         else:
-            tax = calculate_tax(result)
-            inventory = process_delivery(inventory, result)
+            item, quantity = result
+            tax = calculate_tax(quantity)
+            inventory = process_delivery(inventory, quantity)
             deliveries_processed += 1
-            print(f"Added {result} units. Tax on this delivery: {round(tax, 2)}. "
+            print(f"Added {quantity} {item}(s). Tax on this delivery: {round(tax, 2)}. "
                   f"Total inventory: {inventory}")
 
         if inventory > 500:
