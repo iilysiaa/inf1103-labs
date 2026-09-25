@@ -1,8 +1,7 @@
 FROM python:3.11-slim
 
-COPY persistent_auditor.py /app/
+WORKDIR /app
 
-WORKDIR /data
-VOLUME /data
+COPY persistent_auditor.py .
 
-CMD ["python", "-u", "/app/persistent_auditor.py"]
+CMD ["python", "persistent_auditor.py"]
