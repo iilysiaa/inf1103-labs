@@ -31,7 +31,6 @@ def load_inventory(filename=INVENTORY_FILE):
         print("Could not read the inventory file. Starting with an empty inventory.")
         return {}
 
-    print(f"Loaded {len(inventory)} item(s) from {filename}.")
     return inventory
 
 
@@ -45,6 +44,16 @@ def save_inventory(inventory, filename=INVENTORY_FILE):
         print("Warning: could not save inventory to file.")
 
 
+def display_inventory(inventory):
+    """Prints every item in the inventory, one 'item, quantity' per line."""
+    print("Current Inventory:\n")
+    if not inventory:
+        print("(no items yet)")
+    for item, quantity in inventory.items():
+        print(f"{item}, {quantity}")
+    print(f"\nTotal Inventory: {sum(inventory.values())}\n")
+
+
 def get_valid_input():
     """
     Prompts the user for an item name and a stock quantity.
@@ -53,7 +62,11 @@ def get_valid_input():
         "quit"           -> if the user wants to exit
         None             -> if the quantity entered was invalid (so the caller can count it as a failure)
     """
-    item = input("Enter an inventory item (or type 'quit' to exit): ")
+    try:
+        item = input("Enter an inventory item (or type 'quit' to exit): ")
+    except EOFError:
+        print("\nNo input available (run with docker run -it). Exiting.")
+        return "quit"
 
     if item.lower() == 'quit':
         return "quit"
@@ -70,6 +83,8 @@ def get_valid_input():
     except ValueError:
         print("Please enter a valid number for quantity.")
         return None
+    except EOFError:
+        return "quit"
 
 
 def process_delivery(current_total, new_value):
@@ -95,7 +110,7 @@ def main():
     error_count = 0
     deliveries_processed = 0
 
-    print(f"Current total inventory: {inventory}")
+    display_inventory(items)
 
     while True:
         result = get_valid_input()
