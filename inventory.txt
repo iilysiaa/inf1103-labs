@@ -1,0 +1,4 @@
+Apple,150
+Orange,200
+Pear,400
+Cookies,30
