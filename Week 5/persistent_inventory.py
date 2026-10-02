@@ -119,6 +119,29 @@ def add_product(products, transactions):
     print("Product added successfully!")
 
 
+def update_stock(products, transactions):
+    """Finds a product by ID and sets a new stock quantity."""
+    print("\nUpdate Stock")
+    product_id = read_input("Enter Product ID: ")
+    if product_id is None:
+        return
+    product = find_product(products, product_id)
+    if product is None:
+        print("Product not found.")
+        return
+
+    print("Product Found:")
+    print(f"Name: {product['name']}")
+    print(f"Current Stock: {product['stock']}")
+    new_stock = get_number("New Stock Quantity: ", int)
+    if new_stock is None:
+        return
+
+    record_transaction(transactions, product["id"], "update", new_stock - product["stock"])
+    product["stock"] = new_stock
+    print("Stock updated successfully!")
+
+
 def get_valid_input():
     """
     Prompts the user for an item name and a stock quantity.
