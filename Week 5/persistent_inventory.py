@@ -35,6 +35,7 @@ def load_inventory(filename=INVENTORY_FILE):
     return products, transactions
 
 
+
 def save_inventory(products, transactions, filename=INVENTORY_FILE):
     """Writes the products and transaction history to inventory.json."""
     try:
@@ -45,6 +46,8 @@ def save_inventory(products, transactions, filename=INVENTORY_FILE):
         print("Warning: could not save inventory to file.")
         return False
 
+
+
 def read_input(prompt):
     """input() wrapper that exits cleanly if no input is available (e.g. docker run without -it)."""
     try:
@@ -52,6 +55,23 @@ def read_input(prompt):
     except EOFError:
         print("\nNo input available (run with docker run -it). Exiting.")
 
+
+def get_number(prompt, number_type=int):
+    """Keeps asking until the user enters a valid, non-negative number."""
+    while True:
+        value = read_input(prompt)
+        if value is None:
+            return None
+        try:
+            number = number_type(value)
+            if number < 0:
+                print("Value cannot be negative. Please enter a valid number.")
+                continue
+            return number
+        except ValueError:
+            print("Please enter a valid number.")
+
+            
 
 def display_inventory(inventory):
     """Prints every item in the inventory, one 'item, quantity' per line."""
