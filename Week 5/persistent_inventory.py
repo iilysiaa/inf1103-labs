@@ -104,40 +104,53 @@ def generate_report(total_units, failed_attempts):
     print("Number of Failed/Rejected Entries:", failed_attempts)
 
 
-def main():
-    items = load_inventory()              # previously saved stock, per item
-    inventory = sum(items.values())       # running total starts from saved stock
-    error_count = 0
-    deliveries_processed = 0
+def show_menu():
+    print("\n----------- MENU -----------")
+    print("1. Display All Products")
+    print("2. Add Product")
+    print("3. Update Stock")
+    print("4. Search Product")
+    print("5. Save Inventory")
+    print("6. Exit")
+    print("----------------------------")
 
-    display_inventory(items)
+
+def exit_program(products, transactions):
+    print("Saving inventory before exit...")
+    if save_inventory(products, transactions):
+        print("Inventory saved successfully.")
+    print("Thank you for using Inventory Management System.")
+    print("Program terminated.")
+
+
+def main():
+    print("=" * 40)
+    print("INVENTORY MANAGEMENT SYSTEM")
+    print("=" * 40)
+
+    products, transactions = load_inventory()
 
     while True:
-        result = get_valid_input()
+        show_menu()
+        option = read_input("Enter option: ")
 
-        if result == "quit":
-            save_inventory(items)
-            generate_report(inventory, error_count)
+        if option is None or option == "6":
+            exit_program(products, transactions)
             break
-
-        elif result is None:
-            error_count += 1
-            continue
-
+        elif option == "1":
+            display_all(products)
+        elif option == "2":
+            add_product(products, transactions)
+        elif option == "3":
+            update_stock(products, transactions)
+        elif option == "4":
+            search_product(products)
+        elif option == "5":
+            print("Saving inventory...")
+            if save_inventory(products, transactions):
+                print(f"Inventory saved successfully to {os.path.basename(INVENTORY_FILE)}.")
         else:
-            item, quantity = result
-            tax = calculate_tax(quantity)
-            inventory = process_delivery(inventory, quantity)
-            items[item] = process_delivery(items.get(item, 0), quantity)
-            deliveries_processed += 1
-            save_inventory(items)         # save after every delivery so nothing is lost
-            print(f"Added {quantity} {item}(s). Tax on this delivery: {round(tax, 2)}. "
-                  f"Total inventory: {inventory}")
-
-        if inventory > 500:
-            print("Warning: Inventory exceeds 500 items!")
-            generate_report(inventory, error_count)
-            break
+            print("Invalid option. Please enter a number from 1 to 6.")
 
 
 if __name__ == "__main__":
