@@ -96,6 +96,29 @@ def display_all(products):
               f"Price: ${p['price']:.2f} | Stock: {p['stock']}")
     print(LINE)
 
+def add_product(products, transactions):
+    """Asks for product details and adds a new product dictionary to the list."""
+    print("\nAdd New Product")
+    product_id = read_input("Product ID: ")
+    if not product_id:
+        print("Product ID cannot be empty.")
+        return
+    product_id = product_id.upper()
+    if find_product(products, product_id):
+        print("A product with this ID already exists.")
+        return
+
+    name = read_input("Product Name: ")
+    price = get_number("Price: ", float)
+    stock = get_number("Stock Quantity: ", int)
+    if name is None or price is None or stock is None:
+        return
+
+    products.append({"id": product_id, "name": name, "price": price, "stock": stock})
+    record_transaction(transactions, product_id, "add", stock)
+    print("Product added successfully!")
+
+
 def get_valid_input():
     """
     Prompts the user for an item name and a stock quantity.
