@@ -79,7 +79,12 @@ def find_product(products, product_id):
             return product
     return None
 
-           
+
+def record_transaction(transactions, product_id, action, amount):
+    """Adds one stock change to the transaction history."""
+    transactions.append({"product_id": product_id, "action": action, "amount": amount})
+
+    
 
 def display_inventory(inventory):
     """Prints every item in the inventory, one 'item, quantity' per line."""
