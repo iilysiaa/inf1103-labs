@@ -84,17 +84,17 @@ def record_transaction(transactions, product_id, action, amount):
     """Adds one stock change to the transaction history."""
     transactions.append({"product_id": product_id, "action": action, "amount": amount})
 
-    
 
-def display_inventory(inventory):
-    """Prints every item in the inventory, one 'item, quantity' per line."""
-    print("Current Inventory:\n")
-    if not inventory:
-        print("(no items yet)")
-    for item, quantity in inventory.items():
-        print(f"{item}, {quantity}")
-    print(f"\nTotal Inventory: {sum(inventory.values())}\n")
-
+def display_all(products):
+    """Prints every product in the inventory."""
+    print("\nCurrent Inventory")
+    print(LINE)
+    if not products:
+        print("(no products yet)")
+    for p in products:
+        print(f"ID: {p['id']} | Name: {p['name']} | "
+              f"Price: ${p['price']:.2f} | Stock: {p['stock']}")
+    print(LINE)
 
 def get_valid_input():
     """
