@@ -4,36 +4,36 @@ import os
 INVENTORY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "inventory.json")
 LINE = "-" * 48
 
-
 def load_inventory(filename=INVENTORY_FILE):
     """
-    Reads previously saved inventory from the file.
-    Each line is stored as: item,quantity
-    Returns a dictionary {item: quantity}.
-    If the file does not exist (or can't be read), returns an empty inventory.
+    Loads previously saved data from inventory.json.
+    The file stores:
+        "products"     -> list of product dictionaries
+        "transactions" -> history of every stock change amount
+    If the file does not exist (or can't be read), starts with an empty inventory.
+    Returns (products, transactions).
     """
-    inventory = {}
-
     if not os.path.exists(filename):
-        print("No saved inventory found. Starting with an empty inventory.")
-        return inventory
+        print(f"{os.path.basename(filename)} not found. Starting with an empty inventory.")
+        return [], []
 
+    print(f"{os.path.basename(filename)} found.")
     try:
         with open(filename, "r") as file:
-            for line in file:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    item, quantity = line.rsplit(",", 1)
-                    inventory[item] = inventory.get(item, 0) + int(quantity)
-                except ValueError:
-                    print(f"Skipping invalid line in inventory file: {line}")
-    except OSError:
+            data = json.load(file)
+    except (OSError, json.JSONDecodeError):
         print("Could not read the inventory file. Starting with an empty inventory.")
-        return {}
+        return [], []
 
-    return inventory
+    if isinstance(data, list):
+        products, transactions = data, []
+    else:
+        products = data.get("products", [])
+        transactions = data.get("transactions", [])
+
+    print("Inventory loaded successfully.")
+    return products, transactions
+
 
 
 def save_inventory(inventory, filename=INVENTORY_FILE):
