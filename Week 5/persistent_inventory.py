@@ -1,6 +1,8 @@
+import json
 import os
 
-INVENTORY_FILE = "inventory.txt"
+INVENTORY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "inventory.json")
+LINE = "-" * 48
 
 
 def load_inventory(filename=INVENTORY_FILE):
