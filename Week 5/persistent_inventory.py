@@ -35,15 +35,22 @@ def load_inventory(filename=INVENTORY_FILE):
     return products, transactions
 
 
-
-def save_inventory(inventory, filename=INVENTORY_FILE):
-    """Writes the inventory dictionary to the file, one 'item,quantity' per line."""
+def save_inventory(products, transactions, filename=INVENTORY_FILE):
+    """Writes the products and transaction history to inventory.json."""
     try:
         with open(filename, "w") as file:
-            for item, quantity in inventory.items():
-                file.write(f"{item},{quantity}\n")
+            json.dump({"products": products, "transactions": transactions}, file, indent=4)
+        return True
     except OSError:
         print("Warning: could not save inventory to file.")
+        return False
+
+def read_input(prompt):
+    """input() wrapper that exits cleanly if no input is available (e.g. docker run without -it)."""
+    try:
+        return input(prompt).strip()
+    except EOFError:
+        print("\nNo input available (run with docker run -it). Exiting.")
 
 
 def display_inventory(inventory):
