@@ -71,7 +71,15 @@ def get_number(prompt, number_type=int):
         except ValueError:
             print("Please enter a valid number.")
 
-            
+           
+def find_product(products, product_id):
+    """Returns the product dictionary with the given ID, or None if not found."""
+    for product in products:
+        if product["id"].upper() == product_id.upper():
+            return product
+    return None
+
+           
 
 def display_inventory(inventory):
     """Prints every item in the inventory, one 'item, quantity' per line."""
