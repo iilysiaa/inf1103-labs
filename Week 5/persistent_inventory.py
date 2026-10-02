@@ -142,54 +142,24 @@ def update_stock(products, transactions):
     print("Stock updated successfully!")
 
 
-def get_valid_input():
-    """
-    Prompts the user for an item name and a stock quantity.
-    Returns:
-        (item, quantity) -> a valid item name and non-negative quantity
-        "quit"           -> if the user wants to exit
-        None             -> if the quantity entered was invalid (so the caller can count it as a failure)
-    """
-    try:
-        item = input("Enter an inventory item (or type 'quit' to exit): ")
-    except EOFError:
-        print("\nNo input available (run with docker run -it). Exiting.")
-        return "quit"
+def search_product(products):
+    """Finds a product by ID and prints its details."""
+    print("\nSearch Product")
+    product_id = read_input("Enter Product ID: ")
+    if product_id is None:
+        return
+    product = find_product(products, product_id)
+    if product is None:
+        print("Product not found.")
+        return
 
-    if item.lower() == 'quit':
-        return "quit"
-
-    try:
-        quantity = int(input(f"Enter the quantity of {item}: "))
-
-        if quantity < 0:
-            print("Quantity cannot be negative. Please enter a valid number.")
-            return None
-
-        return item, quantity
-
-    except ValueError:
-        print("Please enter a valid number for quantity.")
-        return None
-    except EOFError:
-        return "quit"
-
-
-def process_delivery(current_total, new_value):
-    """Adds a new delivery to the running total and returns the new total."""
-    return current_total + new_value
-
-
-def calculate_tax(amount):
-    """Returns 10% tax on a single delivery amount."""
-    return amount * 0.10
-
-
-def generate_report(total_units, failed_attempts):
-    """Prints the final summary report."""
-    print("\n--- Final Audit Report ---")
-    print("Total Deliveries Processed (units):", total_units)
-    print("Number of Failed/Rejected Entries:", failed_attempts)
+    print("Product Found")
+    print(LINE)
+    print(f"ID: {product['id']}")
+    print(f"Name: {product['name']}")
+    print(f"Price: ${product['price']:.2f}")
+    print(f"Stock: {product['stock']}")
+    print(LINE)
 
 
 def show_menu():
