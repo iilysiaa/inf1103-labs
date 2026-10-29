@@ -9,3 +9,13 @@ class Product:
     def get_name(self):       return self.__name
     def get_price(self):      return self.__price
     def get_stock(self):      return self.__stock
+
+    def update_stock(self, quantity):
+        if quantity < 0:
+            print("Stock cannot be negative.")
+            return
+        self.__stock = quantity
+
+    def display_information(self):
+        print(f"ID: {self.__product_id} | Name: {self.__name} | "
+              f"Price: ${self.__price:.2f} | Stock: {self.__stock}")
