@@ -23,3 +23,23 @@ class Product:
     # Convert the product back to a dictionary so it can be saved as JSON
     def to_dict(self):
         return {"id": self.__product_id, "name": self.__name, "price": self.__price, "stock": self.__stock}
+
+# ==================== Inventory Class ====================
+
+class Inventory:
+    def __init__(self):
+        self.__products = []
+
+    # Returns True if added, False if a product with the same ID already exists
+    def add_product(self, product):
+        if self.search_product(product.get_product_id()) is not None:
+            return False
+        self.__products.append(product)
+        return True
+
+    # Find a Product by its ID (not case-sensitive), or None if not found
+    def search_product(self, product_id):
+        for product in self.__products:
+            if product.get_product_id().upper() == product_id.upper():
+                return product
+        return None
