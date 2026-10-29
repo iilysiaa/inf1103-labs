@@ -43,3 +43,12 @@ class Inventory:
             if product.get_product_id().upper() == product_id.upper():
                 return product
         return None
+
+    def display_all(self):
+        print("Current Inventory")
+        print("-" * 45)
+        if len(self.__products) == 0:
+            print("No products in inventory.")
+        for product in self.__products:
+            product.display_information()
+        print("-" * 45)
