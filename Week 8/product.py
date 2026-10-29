@@ -52,3 +52,10 @@ class Inventory:
         for product in self.__products:
             product.display_information()
         print("-" * 45)
+
+    # Returns the products as a list of dictionaries (used when saving to JSON)
+    def to_list(self):
+        result = []
+        for product in self.__products:
+            result.append(product.to_dict())
+        return result
