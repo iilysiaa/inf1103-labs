@@ -10,5 +10,11 @@
         "name": "Ipad Mini",
         "price": 3400.0,
         "stock": 600
+    },
+    {
+        "id": "1003",
+        "name": "Iphone Duo",
+        "price": 3000.0,
+        "stock": 600
     }
 ]
