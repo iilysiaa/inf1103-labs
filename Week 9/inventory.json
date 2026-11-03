@@ -3,18 +3,24 @@
         "id": "1001",
         "name": "Iphone 17",
         "price": 2100.0,
-        "stock": 150
+        "stock": 150,
+        "type": "physical",
+        "weight": 0.18
     },
     {
         "id": "1002",
         "name": "Ipad Mini",
         "price": 3400.0,
-        "stock": 600
+        "stock": 600,
+        "type": "physical",
+        "weight": 0.29
     },
     {
         "id": "1003",
         "name": "Iphone Duo",
         "price": 3000.0,
-        "stock": 600
+        "stock": 600,
+        "type": "physical",
+        "weight": 0.2
     }
 ]
