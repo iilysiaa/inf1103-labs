@@ -71,6 +71,8 @@ class CanBeShipped(ABC):
 #Single class inheritance: Product is the only parent class
 #CanBeShipped is an interface it implements, not a second parent class
 class PhysicalProduct(Product, CanBeShipped):
+    #Type identifier saved in inventory.json (defined once, used for both saving and loading)
+    PRODUCT_TYPE = "physical"
     #Shipping rule: a flat base fee plus a charge for every kilogram
     BASE_SHIPPING_FEE = 5.00
     SHIPPING_FEE_PER_KG = 2.50
@@ -100,7 +102,7 @@ class PhysicalProduct(Product, CanBeShipped):
     # Reuse Product's dictionary, then add the type and the physical-only attribute
     def to_dict(self):
         data = super().to_dict()
-        data["type"] = "physical"
+        data["type"] = self.PRODUCT_TYPE
         data["weight"] = self.__weight
         return data
 
@@ -112,6 +114,9 @@ class PhysicalProduct(Product, CanBeShipped):
 
 # ==================== DigitalProduct Class (inherits from Product) ====================
 class DigitalProduct(Product):
+    #Type identifier saved in inventory.json (defined once, used for both saving and loading)
+    PRODUCT_TYPE = "digital"
+
     def __init__(self, product_id, name, price, stock, download_size):
         #Reuse the Product constructor to set up the common attributes
         super().__init__(product_id, name, price, stock)
@@ -133,7 +138,7 @@ class DigitalProduct(Product):
     # Reuse Product's dictionary, then add the type and the digital-only attribute
     def to_dict(self):
         data = super().to_dict()
-        data["type"] = "digital"
+        data["type"] = self.PRODUCT_TYPE
         data["download_size"] = self.__download_size
         return data
 
@@ -183,8 +188,8 @@ class Inventory:
 # ==================== File Handling ====================
 #Maps the "type" saved in inventory.json to the class that knows how to rebuild that product
 PRODUCT_TYPES = {
-    "physical": PhysicalProduct,
-    "digital": DigitalProduct,
+    PhysicalProduct.PRODUCT_TYPE: PhysicalProduct,
+    DigitalProduct.PRODUCT_TYPE: DigitalProduct,
 }
 
 
