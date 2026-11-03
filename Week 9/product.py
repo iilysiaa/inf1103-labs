@@ -64,8 +64,14 @@ class CanBeShipped(ABC):
         pass
 
 
-# ==================== PhysicalProduct Class (inherits from Product) ====================
-class PhysicalProduct(Product):
+# ==================== PhysicalProduct Class (inherits from Product, implements CanBeShipped) ====================
+#Single class inheritance: Product is the only parent class
+#CanBeShipped is an interface it implements, not a second parent class
+class PhysicalProduct(Product, CanBeShipped):
+    #Shipping rule: a flat base fee plus a charge for every kilogram
+    BASE_SHIPPING_FEE = 5.00
+    SHIPPING_FEE_PER_KG = 2.50
+
     def __init__(self, product_id, name, price, stock, weight):
         #Reuse the Product constructor to set up the common attributes
         super().__init__(product_id, name, price, stock)
@@ -83,6 +89,10 @@ class PhysicalProduct(Product):
     # Implements the abstract method from Product
     def get_fulfilment_info(self):
         return "This product requires physical shipping (" + format(self.__weight, ".2f") + " kg)."
+
+    # Implements the abstract method from the CanBeShipped interface
+    def calculate_shipping_cost(self):
+        return self.BASE_SHIPPING_FEE + self.SHIPPING_FEE_PER_KG * self.__weight
 
 
 # ==================== DigitalProduct Class (inherits from Product) ====================
