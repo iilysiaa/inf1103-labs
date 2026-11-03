@@ -4,13 +4,15 @@
 
 import json
 import os
+from abc import ABC, abstractmethod
 
 #inventory.json is kept in the same folder as this script, so it is found no matter which folder the program is run from
 INVENTORY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "inventory.json")
 
 
 # ==================== Product Class ====================
-class Product:
+#Product is an abstract base class (ABC) - it cannot be created directly, only through its subclasses
+class Product(ABC):
     def __init__(self, product_id, name, price, stock):
         #Private attributes (name mangling) - outside code should use the methods below
         self.__product_id = product_id
@@ -45,6 +47,11 @@ class Product:
     # Convert the product back to a dictionary so it can be saved as JSON
     def to_dict(self):
         return {"id": self.__product_id, "name": self.__name, "price": self.__price, "stock": self.__stock}
+
+    # Abstract method - no implementation here, every subclass must provide its own
+    @abstractmethod
+    def get_fulfilment_info(self):
+        pass
 
 
 # ==================== PhysicalProduct Class (inherits from Product) ====================
