@@ -54,6 +54,16 @@ class Product(ABC):
         pass
 
 
+# ==================== CanBeShipped Interface ====================
+#An interface (abstract base class) for anything that can be shipped - not only products
+#It only defines WHAT must be provided, not HOW, so it has no attributes and no implementation
+class CanBeShipped(ABC):
+    # Any class that signs this contract must provide a way to calculate its shipping cost
+    @abstractmethod
+    def calculate_shipping_cost(self):
+        pass
+
+
 # ==================== PhysicalProduct Class (inherits from Product) ====================
 class PhysicalProduct(Product):
     def __init__(self, product_id, name, price, stock, weight):
