@@ -1,0 +1,23 @@
+# Python bytecode / cache (created automatically when a .py file is imported)
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables / secrets
+.env
+
+# Editor and IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary file created (and normally deleted) by the save/load tests
+test_inventory.json

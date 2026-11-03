@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY product.py .
+COPY inventory.json .
+COPY test_*.py .
+
+CMD ["python", "product.py"]
