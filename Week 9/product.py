@@ -1,4 +1,4 @@
-#INF1103 Lab 6 - Inventory Management System refactored using OOP
+#INF1103 Lab 7 - Inventory Management System refactored using OOP
 #Product   -> represents and manages ONE product
 #Inventory -> manages a collection of Product objects
 
@@ -62,6 +62,23 @@ class PhysicalProduct(Product):
     def display_information(self):
         super().display_information()
         print("Weight: " + format(self.__weight, ".2f") + " kg")
+
+
+# ==================== DigitalProduct Class (inherits from Product) ====================
+class DigitalProduct(Product):
+    def __init__(self, product_id, name, price, stock, download_size):
+        #Reuse the Product constructor to set up the common attributes
+        super().__init__(product_id, name, price, stock)
+        #Extra attribute only a digital product has: download size in megabytes
+        self.__download_size = download_size
+
+    def get_download_size(self):
+        return self.__download_size
+
+    # Show the existing product information, then the download size
+    def display_information(self):
+        super().display_information()
+        print("Download Size: " + format(self.__download_size, ".2f") + " MB")
 
 
 # ==================== Inventory Class ====================
