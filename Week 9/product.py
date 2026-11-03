@@ -1,6 +1,9 @@
-#INF1103 Lab 7 - Inventory Management System refactored using OOP
-#Product   -> represents and manages ONE product
-#Inventory -> manages a collection of Product objects
+#INF1103 Lab 7 - Inventory Management System using Inheritance, Abstract Classes and Interfaces
+#Product         -> abstract base class for ONE product
+#CanBeShipped    -> interface for anything that can be shipped
+#PhysicalProduct -> a Product that implements CanBeShipped (has a weight)
+#DigitalProduct  -> a Product that is downloaded (has a download size)
+#Inventory       -> manages a collection of Product objects
 
 import json
 import os
@@ -94,6 +97,18 @@ class PhysicalProduct(Product, CanBeShipped):
     def calculate_shipping_cost(self):
         return self.BASE_SHIPPING_FEE + self.SHIPPING_FEE_PER_KG * self.__weight
 
+    # Reuse Product's dictionary, then add the type and the physical-only attribute
+    def to_dict(self):
+        data = super().to_dict()
+        data["type"] = "physical"
+        data["weight"] = self.__weight
+        return data
+
+    # Build a PhysicalProduct from a dictionary loaded from JSON
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["id"], data["name"], data["price"], data["stock"], data["weight"])
+
 
 # ==================== DigitalProduct Class (inherits from Product) ====================
 class DigitalProduct(Product):
@@ -114,6 +129,18 @@ class DigitalProduct(Product):
     # Implements the abstract method from Product
     def get_fulfilment_info(self):
         return "This product is delivered digitally as a download (" + format(self.__download_size, ".2f") + " MB)."
+
+    # Reuse Product's dictionary, then add the type and the digital-only attribute
+    def to_dict(self):
+        data = super().to_dict()
+        data["type"] = "digital"
+        data["download_size"] = self.__download_size
+        return data
+
+    # Build a DigitalProduct from a dictionary loaded from JSON
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["id"], data["name"], data["price"], data["stock"], data["download_size"])
 
 
 # ==================== Inventory Class ====================
@@ -140,9 +167,10 @@ class Inventory:
         print("-" * 45)
         if len(self.__products) == 0:
             print("No products in inventory.")
+        #Polymorphism: each product displays itself, the Inventory just asks it to
         for product in self.__products:
             product.display_information()
-        print("-" * 45)
+            print("-" * 45)
 
     # Returns the products as a list of dictionaries (used when saving to JSON)
     def to_list(self):
@@ -153,6 +181,13 @@ class Inventory:
 
 
 # ==================== File Handling ====================
+#Maps the "type" saved in inventory.json to the class that knows how to rebuild that product
+PRODUCT_TYPES = {
+    "physical": PhysicalProduct,
+    "digital": DigitalProduct,
+}
+
+
 # Load inventory.json into an Inventory object, or start with an empty Inventory
 def load_inventory():
     inventory = Inventory()
@@ -165,9 +200,11 @@ def load_inventory():
     try:
         with open(INVENTORY_FILE, "r") as file:
             items = json.load(file)
-        #Turn each dictionary from the file into a Product object
+        #Turn each dictionary from the file into the right kind of Product object
+        #A missing or unknown "type" raises KeyError and is treated as invalid data
         for item in items:
-            inventory.add_product(Product(item["id"], item["name"], item["price"], item["stock"]))
+            product_class = PRODUCT_TYPES[item["type"]]
+            inventory.add_product(product_class.from_dict(item))
         print("Inventory loaded successfully.")
     except (json.JSONDecodeError, KeyError, TypeError):
         #File exists but does not contain valid inventory data
@@ -211,8 +248,28 @@ def get_valid_stock(prompt):
         print("Invalid quantity! We only accept positive whole numbers.")
 
 
+# Helper: keep asking until the user enters a number that is not negative (used for weight and download size)
+def get_valid_number(prompt):
+    while True:
+        try:
+            number = float(input(prompt))
+            if number >= 0:
+                return number
+        except ValueError:
+            pass
+        print("Invalid value! Please enter a positive number.")
+
+
 def add_product_menu(inventory):
     print("Add New Product")
+    print("1. Physical Product")
+    print("2. Digital Product")
+    product_type = input("Choose product type: ").strip()
+    if product_type not in ("1", "2"):
+        print("Invalid product type! Please choose 1 or 2.")
+        return
+    print()
+
     product_id = input("Product ID: ").strip().upper()
     if product_id == "":
         print("Product ID cannot be empty.")
@@ -229,7 +286,13 @@ def add_product_menu(inventory):
     price = get_valid_price("Price: ")
     stock = get_valid_stock("Stock Quantity: ")
 
-    product = Product(product_id, name, price, stock)
+    #Ask for the extra information only this type of product has
+    if product_type == "1":
+        weight = get_valid_number("Weight (kg): ")
+        product = PhysicalProduct(product_id, name, price, stock, weight)
+    else:
+        download_size = get_valid_number("Download Size (MB): ")
+        product = DigitalProduct(product_id, name, price, stock, download_size)
     inventory.add_product(product)
     print()
     print("Product added successfully!")
@@ -265,10 +328,12 @@ def search_product_menu(inventory):
 
     print("Product Found")
     print("-" * 45)
-    print("ID: " + product.get_product_id())
-    print("Name: " + product.get_name())
-    print("Price: $" + format(product.get_price(), ".2f"))
-    print("Stock: " + str(product.get_stock()))
+    #Each product type displays its own details
+    product.display_information()
+    print("Fulfilment: " + product.get_fulfilment_info())
+    #Only products that implement CanBeShipped have a shipping cost
+    if isinstance(product, CanBeShipped):
+        print("Shipping Cost: $" + format(product.calculate_shipping_cost(), ".2f"))
     print("-" * 45)
 
 
