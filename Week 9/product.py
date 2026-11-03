@@ -70,6 +70,10 @@ class PhysicalProduct(Product):
         super().display_information()
         print("Weight: " + format(self.__weight, ".2f") + " kg")
 
+    # Implements the abstract method from Product
+    def get_fulfilment_info(self):
+        return "This product requires physical shipping (" + format(self.__weight, ".2f") + " kg)."
+
 
 # ==================== DigitalProduct Class (inherits from Product) ====================
 class DigitalProduct(Product):
@@ -86,6 +90,10 @@ class DigitalProduct(Product):
     def display_information(self):
         super().display_information()
         print("Download Size: " + format(self.__download_size, ".2f") + " MB")
+
+    # Implements the abstract method from Product
+    def get_fulfilment_info(self):
+        return "This product is delivered digitally as a download (" + format(self.__download_size, ".2f") + " MB)."
 
 
 # ==================== Inventory Class ====================
