@@ -173,15 +173,25 @@ class Inventory:
         #Typed with the base class Product, so the list can hold PhysicalProduct and DigitalProduct objects
         self.products: list[Product] = []
 
+    # Add an existing Product object (the Inventory only stores a reference to it)
     # Returns True if added, False if a product with the same ID already exists
     def add_product(self, product: Product) -> bool:
-        if self.search_product(product.get_product_id()) is not None:
+        if self.find_product(product.get_product_id()) is not None:
             return False
         self.products.append(product)
         return True
 
+    # Remove the matching Product reference from the collection - the Product object itself is not destroyed
+    # Returns True if removed, False if no product has that ID
+    def remove_product(self, product_id: str) -> bool:
+        product = self.find_product(product_id)
+        if product is None:
+            return False
+        self.products.remove(product)
+        return True
+
     # Find a Product by its ID (not case-sensitive), or None if not found
-    def search_product(self, product_id: str) -> Product | None:
+    def find_product(self, product_id: str) -> Product | None:
         for product in self.products:
             if product.get_product_id().upper() == product_id.upper():
                 return product
