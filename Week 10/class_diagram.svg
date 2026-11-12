@@ -1,33 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1559" height="1006" viewBox="0 0 1559 1006">
+<svg xmlns="http://www.w3.org/2000/svg" width="1676" height="1024" viewBox="0 0 1676 1024">
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="20.0" y="40.0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="start" xml:space="preserve">Inventory Management System - UML Class Diagram (Week 10)</text>
-<rect x="1192.4" y="80" width="336.5" height="264" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
-<rect x="1192.4" y="80" width="336.5" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
-<text x="1360.7" y="102.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">Supplier</text>
-<text x="1200.4" y="135.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- supplier_id: String</text>
-<text x="1200.4" y="153.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- name: String</text>
-<text x="1200.4" y="171.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- contact_email: String</text>
-<line x1="1192.4" y1="184.0" x2="1528.9" y2="184.0" stroke="#222" stroke-width="1.4"/>
-<text x="1200.4" y="205.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__(supplier_id: String, name: String,</text>
-<text x="1200.4" y="223.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">           contact_email: String)</text>
-<text x="1200.4" y="241.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_supplier_id(): String</text>
-<text x="1200.4" y="259.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_name(): String</text>
-<text x="1200.4" y="277.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_contact_email(): String</text>
-<text x="1200.4" y="295.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_information(): void</text>
-<text x="1200.4" y="313.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
-<text x="1200.4" y="331.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ from_dict(data: Dictionary): Supplier</text>
-<rect x="603.1" y="80" width="419.3" height="368" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
-<rect x="603.1" y="80" width="419.3" height="48" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
-<text x="812.8" y="98.0" font-family="Consolas, 'Courier New', monospace" font-size="12" font-weight="normal" text-anchor="middle" xml:space="preserve">«abstract»</text>
-<text x="812.8" y="117.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" font-style="italic" xml:space="preserve">Product</text>
+<text x="20.0" y="40.0" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="start" xml:space="preserve">Inventory Management System - Complete UML Class Diagram (Week 10)</text>
+<rect x="1247.6" y="80" width="398.6" height="264" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
+<rect x="1247.6" y="80" width="398.6" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
+<text x="1446.9" y="102.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">Supplier</text>
+<text x="1255.6" y="135.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- supplier_id: String</text>
+<text x="1255.6" y="153.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- name: String</text>
+<text x="1255.6" y="171.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- contact_email: String</text>
+<line x1="1247.6" y1="184.0" x2="1646.2" y2="184.0" stroke="#222" stroke-width="1.4"/>
+<text x="1255.6" y="205.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» Supplier(supplier_id: String, name: String,</text>
+<text x="1255.6" y="223.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">                    contact_email: String)</text>
+<text x="1255.6" y="241.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_supplier_id(): String</text>
+<text x="1255.6" y="259.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_name(): String</text>
+<text x="1255.6" y="277.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_contact_email(): String</text>
+<text x="1255.6" y="295.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_information(): void</text>
+<text x="1255.6" y="313.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
+<text x="1255.6" y="331.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ from_dict(data: Dictionary): Supplier</text>
+<rect x="603.1" y="80" width="474.5" height="368" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
+<rect x="603.1" y="80" width="474.5" height="48" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
+<text x="840.4" y="98.0" font-family="Consolas, 'Courier New', monospace" font-size="12" font-weight="normal" text-anchor="middle" xml:space="preserve">«abstract»</text>
+<text x="840.4" y="117.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" font-style="italic" xml:space="preserve">Product</text>
 <text x="611.1" y="149.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- product_id: String</text>
 <text x="611.1" y="167.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- name: String</text>
 <text x="611.1" y="185.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- price: Real</text>
 <text x="611.1" y="203.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- stock: Integer</text>
 <text x="611.1" y="221.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ supplier: Supplier</text>
-<line x1="603.1" y1="234.0" x2="1022.4" y2="234.0" stroke="#222" stroke-width="1.4"/>
-<text x="611.1" y="255.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__(product_id: String, name: String, price: Real,</text>
-<text x="611.1" y="273.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">           stock_quantity: Integer, supplier: Supplier)</text>
+<line x1="603.1" y1="234.0" x2="1077.6" y2="234.0" stroke="#222" stroke-width="1.4"/>
+<text x="611.1" y="255.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» Product(product_id: String, name: String, price: Real,</text>
+<text x="611.1" y="273.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">                   stock_quantity: Integer, supplier: Supplier)</text>
 <text x="611.1" y="291.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_product_id(): String</text>
 <text x="611.1" y="309.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_name(): String</text>
 <text x="611.1" y="327.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_price(): Real</text>
@@ -37,59 +37,61 @@
 <text x="611.1" y="399.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_supplier_information(): void</text>
 <text x="611.1" y="417.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
 <text x="611.1" y="435.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" font-style="italic" xml:space="preserve">+ «abstract» get_fulfilment_info(): String</text>
-<rect x="1192.4" y="424" width="329.6" height="100" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
-<rect x="1192.4" y="424" width="329.6" height="48" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
-<text x="1357.2" y="442.0" font-family="Consolas, 'Courier New', monospace" font-size="12" font-weight="normal" text-anchor="middle" xml:space="preserve">«interface»</text>
-<text x="1357.2" y="461.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" font-style="italic" xml:space="preserve">CanBeShipped</text>
-<line x1="1192.4" y1="490.0" x2="1522.0" y2="490.0" stroke="#222" stroke-width="1.4"/>
-<text x="1200.4" y="511.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" font-style="italic" xml:space="preserve">+ «abstract» calculate_shipping_cost(): Real</text>
-<rect x="1039.3" y="634" width="377.9" height="282" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
-<rect x="1039.3" y="634" width="377.9" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
-<text x="1228.3" y="656.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">PhysicalProduct</text>
-<text x="1047.3" y="689.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ PRODUCT_TYPE: String = &quot;physical&quot;</text>
-<text x="1047.3" y="707.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ BASE_SHIPPING_FEE: Real = 5.00</text>
-<text x="1047.3" y="725.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ SHIPPING_FEE_PER_KG: Real = 2.50</text>
-<text x="1047.3" y="743.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- weight: Real</text>
-<line x1="1039.3" y1="756.0" x2="1417.2" y2="756.0" stroke="#222" stroke-width="1.4"/>
-<text x="1047.3" y="777.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__(product_id, name, price, stock_quantity,</text>
-<text x="1047.3" y="795.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">           supplier, weight: Real)</text>
-<text x="1047.3" y="813.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_weight(): Real</text>
-<text x="1047.3" y="831.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_information(): void</text>
-<text x="1047.3" y="849.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_fulfilment_info(): String</text>
-<text x="1047.3" y="867.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ calculate_shipping_cost(): Real</text>
-<text x="1047.3" y="885.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
-<text x="1047.3" y="903.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ from_dict(data: Dictionary): PhysicalProduct</text>
-<rect x="581.4" y="634" width="377.9" height="228" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
-<rect x="581.4" y="634" width="377.9" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
-<text x="770.4" y="656.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">DigitalProduct</text>
-<text x="589.4" y="689.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ PRODUCT_TYPE: String = &quot;digital&quot;</text>
-<text x="589.4" y="707.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- download_size: Real</text>
-<line x1="581.4" y1="720.0" x2="959.3" y2="720.0" stroke="#222" stroke-width="1.4"/>
-<text x="589.4" y="741.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__(product_id, name, price, stock_quantity,</text>
-<text x="589.4" y="759.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">           supplier, download_size: Real)</text>
-<text x="589.4" y="777.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_download_size(): Real</text>
-<text x="589.4" y="795.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_information(): void</text>
-<text x="589.4" y="813.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_fulfilment_info(): String</text>
-<text x="589.4" y="831.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
-<text x="589.4" y="849.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ from_dict(data: Dictionary): DigitalProduct</text>
+<rect x="1247.6" y="424" width="329.6" height="100" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
+<rect x="1247.6" y="424" width="329.6" height="48" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
+<text x="1412.4" y="442.0" font-family="Consolas, 'Courier New', monospace" font-size="12" font-weight="normal" text-anchor="middle" xml:space="preserve">«interface»</text>
+<text x="1412.4" y="461.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" font-style="italic" xml:space="preserve">CanBeShipped</text>
+<line x1="1247.6" y1="490.0" x2="1577.2" y2="490.0" stroke="#222" stroke-width="1.4"/>
+<text x="1255.6" y="511.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" font-style="italic" xml:space="preserve">+ «abstract» calculate_shipping_cost(): Real</text>
+<rect x="1011.7" y="634" width="460.7" height="300" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
+<rect x="1011.7" y="634" width="460.7" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
+<text x="1242.0" y="656.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">PhysicalProduct</text>
+<text x="1019.7" y="689.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ PRODUCT_TYPE: String = &quot;physical&quot;</text>
+<text x="1019.7" y="707.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ BASE_SHIPPING_FEE: Real = 5.00</text>
+<text x="1019.7" y="725.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ SHIPPING_FEE_PER_KG: Real = 2.50</text>
+<text x="1019.7" y="743.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- weight: Real</text>
+<line x1="1011.7" y1="756.0" x2="1472.4" y2="756.0" stroke="#222" stroke-width="1.4"/>
+<text x="1019.7" y="777.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» PhysicalProduct(product_id: String, name: String,</text>
+<text x="1019.7" y="795.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">      price: Real, stock_quantity: Integer, supplier: Supplier,</text>
+<text x="1019.7" y="813.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">      weight: Real)</text>
+<text x="1019.7" y="831.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_weight(): Real</text>
+<text x="1019.7" y="849.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_information(): void</text>
+<text x="1019.7" y="867.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_fulfilment_info(): String</text>
+<text x="1019.7" y="885.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ calculate_shipping_cost(): Real</text>
+<text x="1019.7" y="903.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
+<text x="1019.7" y="921.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ from_dict(data: Dictionary): PhysicalProduct</text>
+<rect x="471.0" y="634" width="460.7" height="246" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
+<rect x="471.0" y="634" width="460.7" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
+<text x="701.3" y="656.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">DigitalProduct</text>
+<text x="479.0" y="689.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ PRODUCT_TYPE: String = &quot;digital&quot;</text>
+<text x="479.0" y="707.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">- download_size: Real</text>
+<line x1="471.0" y1="720.0" x2="931.7" y2="720.0" stroke="#222" stroke-width="1.4"/>
+<text x="479.0" y="741.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» DigitalProduct(product_id: String, name: String,</text>
+<text x="479.0" y="759.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">      price: Real, stock_quantity: Integer, supplier: Supplier,</text>
+<text x="479.0" y="777.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">      download_size: Real)</text>
+<text x="479.0" y="795.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_download_size(): Real</text>
+<text x="479.0" y="813.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_information(): void</text>
+<text x="479.0" y="831.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ get_fulfilment_info(): String</text>
+<text x="479.0" y="849.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_dict(): Dictionary</text>
+<text x="479.0" y="867.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" text-decoration="underline" xml:space="preserve">+ from_dict(data: Dictionary): DigitalProduct</text>
 <rect x="20.0" y="80" width="371.0" height="192" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
 <rect x="20.0" y="80" width="371.0" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
 <text x="205.5" y="102.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">Inventory</text>
 <text x="28.0" y="135.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ products: Product [0..*]</text>
 <line x1="20.0" y1="148.0" x2="391.0" y2="148.0" stroke="#222" stroke-width="1.4"/>
-<text x="28.0" y="169.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__()</text>
+<text x="28.0" y="169.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» Inventory()</text>
 <text x="28.0" y="187.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ add_product(product: Product): Boolean</text>
 <text x="28.0" y="205.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ remove_product(product_id: String): Boolean</text>
 <text x="28.0" y="223.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ find_product(product_id: String): Product [0..1]</text>
 <text x="28.0" y="241.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_all_products(): void</text>
 <text x="28.0" y="259.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_list(): Dictionary [0..*]</text>
-<rect x="20.0" y="382" width="350.3" height="138" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
-<rect x="20.0" y="382" width="350.3" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
-<text x="195.2" y="404.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">OrderLine</text>
+<rect x="20.0" y="382" width="419.3" height="138" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
+<rect x="20.0" y="382" width="419.3" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
+<text x="229.7" y="404.0" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="bold" text-anchor="middle" xml:space="preserve">OrderLine</text>
 <text x="28.0" y="437.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ product: Product</text>
 <text x="28.0" y="455.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ quantity: Integer</text>
-<line x1="20.0" y1="468.0" x2="370.3" y2="468.0" stroke="#222" stroke-width="1.4"/>
-<text x="28.0" y="489.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__(product: Product, quantity: Integer)</text>
+<line x1="20.0" y1="468.0" x2="439.3" y2="468.0" stroke="#222" stroke-width="1.4"/>
+<text x="28.0" y="489.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» OrderLine(product: Product, quantity: Integer)</text>
 <text x="28.0" y="507.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ calculate_subtotal(): Real</text>
 <rect x="20.0" y="630" width="433.1" height="192" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
 <rect x="20.0" y="630" width="433.1" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>
@@ -97,7 +99,7 @@
 <text x="28.0" y="685.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ order_id: String</text>
 <text x="28.0" y="703.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ order_lines: OrderLine [0..*]</text>
 <line x1="20.0" y1="716.0" x2="453.1" y2="716.0" stroke="#222" stroke-width="1.4"/>
-<text x="28.0" y="737.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ __init__(order_id: String)</text>
+<text x="28.0" y="737.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ «create» Order(order_id: String)</text>
 <text x="28.0" y="755.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ add_order_line(product: Product, quantity: Integer): void</text>
 <text x="28.0" y="773.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ remove_order_line(product_id: String): Boolean</text>
 <text x="28.0" y="791.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ calculate_total(): Real</text>
@@ -107,31 +109,31 @@
 <text x="419.0" y="132.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">0..*</text>
 <text x="595.1" y="132.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="end" xml:space="preserve">0..*</text>
 <text x="497.1" y="160.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" xml:space="preserve">manages</text>
-<line x1="370.3" y1="422.0" x2="603.1" y2="422.0" stroke="#222" stroke-width="1.4"/>
+<line x1="439.3" y1="422.0" x2="603.1" y2="422.0" stroke="#222" stroke-width="1.4"/>
 <polyline points="591.1,429.0 603.1,422.0 591.1,415.0" fill="none" stroke="#222" stroke-width="1.4"/>
-<text x="378.3" y="414.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">0..*</text>
+<text x="447.3" y="414.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">0..*</text>
 <text x="587.1" y="414.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="end" xml:space="preserve">1</text>
-<text x="486.7" y="442.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" xml:space="preserve">refers to</text>
+<text x="521.2" y="442.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" xml:space="preserve">refers to</text>
 <line x1="140.0" y1="630.0" x2="140.0" y2="520.0" stroke="#222" stroke-width="1.4"/>
 <polygon points="140.0,630.0 132.0,619.0 140.0,608.0 148.0,619.0" fill="#222" stroke="#222" stroke-width="1.4"/>
 <text x="150.0" y="602.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">1</text>
 <text x="150.0" y="540.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">0..*</text>
 <text x="170.0" y="579.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">contains</text>
-<line x1="1022.4" y1="150.0" x2="1192.4" y2="150.0" stroke="#222" stroke-width="1.4"/>
-<polyline points="1180.4,157.0 1192.4,150.0 1180.4,143.0" fill="none" stroke="#222" stroke-width="1.4"/>
-<text x="1030.4" y="142.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">0..*</text>
-<text x="1176.4" y="142.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="end" xml:space="preserve">1</text>
-<text x="1107.4" y="170.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" xml:space="preserve">supplied by</text>
-<line x1="812.8" y1="466.0" x2="812.8" y2="551.0" stroke="#222" stroke-width="1.4"/>
-<polygon points="812.8,448.0 823.8,466.0 801.8,466.0" fill="#ffffff" stroke="#222" stroke-width="1.4"/>
-<line x1="770.4" y1="551.0" x2="1159.3" y2="551.0" stroke="#222" stroke-width="1.4"/>
-<line x1="770.4" y1="551.0" x2="770.4" y2="634.0" stroke="#222" stroke-width="1.4"/>
-<line x1="1159.3" y1="551.0" x2="1159.3" y2="634.0" stroke="#222" stroke-width="1.4"/>
-<text x="822.8" y="488.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">inherits from</text>
-<line x1="1357.2" y1="634.0" x2="1357.2" y2="542.0" stroke="#222" stroke-width="1.4" stroke-dasharray="7,5"/>
-<polygon points="1357.2,524.0 1368.2,542.0 1346.2,542.0" fill="#ffffff" stroke="#222" stroke-width="1.4"/>
-<text x="1367.2" y="579.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">implements</text>
-<text x="20.0" y="954.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">Notation: solid line + hollow triangle = inheritance (generalisation) | dashed line + hollow triangle = interface realisation | solid line + open arrow = association</text>
-<text x="20.0" y="974.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">hollow diamond = aggregation | filled diamond = composition | «abstract» / italics = abstract class or method | underlined = class-level (static) member | - private + public</text>
-<text x="20.0" y="994.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">Types: String, Integer, Real, Boolean, void = no return value, Dictionary = key/value map | [0..*] = zero or more | [0..1] = optional (zero or one)</text>
+<line x1="1077.6" y1="150.0" x2="1247.6" y2="150.0" stroke="#222" stroke-width="1.4"/>
+<polyline points="1235.6,157.0 1247.6,150.0 1235.6,143.0" fill="none" stroke="#222" stroke-width="1.4"/>
+<text x="1085.6" y="142.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">0..*</text>
+<text x="1231.6" y="142.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="end" xml:space="preserve">1</text>
+<text x="1162.6" y="170.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="middle" xml:space="preserve">supplied by</text>
+<line x1="840.4" y1="466.0" x2="840.4" y2="551.0" stroke="#222" stroke-width="1.4"/>
+<polygon points="840.4,448.0 851.4,466.0 829.4,466.0" fill="#ffffff" stroke="#222" stroke-width="1.4"/>
+<line x1="701.3" y1="551.0" x2="1131.7" y2="551.0" stroke="#222" stroke-width="1.4"/>
+<line x1="701.3" y1="551.0" x2="701.3" y2="634.0" stroke="#222" stroke-width="1.4"/>
+<line x1="1131.7" y1="551.0" x2="1131.7" y2="634.0" stroke="#222" stroke-width="1.4"/>
+<text x="850.4" y="488.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">inherits from</text>
+<line x1="1412.4" y1="634.0" x2="1412.4" y2="542.0" stroke="#222" stroke-width="1.4" stroke-dasharray="7,5"/>
+<polygon points="1412.4,524.0 1423.4,542.0 1401.4,542.0" fill="#ffffff" stroke="#222" stroke-width="1.4"/>
+<text x="1422.4" y="579.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">implements</text>
+<text x="20.0" y="972.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">Notation: solid line + hollow triangle = inheritance (generalisation) | dashed line + hollow triangle = interface realisation | solid line = association (open arrow = the class that is referred to)</text>
+<text x="20.0" y="992.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">hollow diamond = aggregation | filled diamond = composition | «abstract» / italics = abstract class or method | underlined = class-level (static) member | - private + public</text>
+<text x="20.0" y="1012.0" font-family="Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">Types: String, Integer, Real, Boolean, void = no return value, Dictionary = key/value map | [0..*] = zero or more | [0..1] = optional (zero or one) | «create» = constructor</text>
 </svg>
