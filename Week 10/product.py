@@ -242,9 +242,29 @@ class Order:
         order_line = OrderLine(product, quantity)
         self.order_lines.append(order_line)
 
+    # Removes the OrderLine for the given product ID - the OrderLine is discarded with it,
+    # but the Product it referred to is not affected
+    # Returns True if removed, False if the order has no line for that product
+    def remove_order_line(self, product_id: str) -> bool:
+        for order_line in self.order_lines:
+            if order_line.product.get_product_id().upper() == product_id.upper():
+                self.order_lines.remove(order_line)
+                return True
+        return False
+
     # Asks each OrderLine for its own subtotal and adds them up
     def calculate_total(self) -> float:
         total: float = 0.0
         for order_line in self.order_lines:
             total += order_line.calculate_subtotal()
         return total
+
+    def display_order(self) -> None:
+        print("Order " + self.order_id)
+        print("-" * 45)
+        if len(self.order_lines) == 0:
+            print("No order lines.")
+        for order_line in self.order_lines:
+            print(order_line.product.get_name() + " | $" + format(order_line.product.get_price(), ".2f")
+                  + " x " + str(order_line.quantity) + " = $" + format(order_line.calculate_subtotal(), ".2f"))
+        print("Total: $" + format(self.calculate_total(), ".2f"))
