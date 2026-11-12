@@ -26,7 +26,7 @@ class Supplier:
         return {"supplier_id": self.__supplier_id, "name": self.__name, "contact_email": self.__contact_email}
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Supplier":
+    def from_dict(cls, data: dict) -> Supplier:
         return cls(data["supplier_id"], data["name"], data["contact_email"])
 
 
@@ -95,10 +95,10 @@ class CanBeShipped(ABC):
 
 # ==================== PhysicalProduct Class (inherits from Product, implements CanBeShipped) ====================
 class PhysicalProduct(Product, CanBeShipped):
-    PRODUCT_TYPE = "physical"
+    PRODUCT_TYPE: str = "physical"
     #Shipping rule: a flat base fee plus a charge for every kilogram
-    BASE_SHIPPING_FEE = 5.00
-    SHIPPING_FEE_PER_KG = 2.50
+    BASE_SHIPPING_FEE: float = 5.00
+    SHIPPING_FEE_PER_KG: float = 2.50
 
     def __init__(self, product_id: str, name: str, price: float,
                  stock_quantity: int, supplier: Supplier, weight: float) -> None:
@@ -121,20 +121,20 @@ class PhysicalProduct(Product, CanBeShipped):
         return self.BASE_SHIPPING_FEE + self.SHIPPING_FEE_PER_KG * self.__weight
 
     def to_dict(self) -> dict:
-        data = super().to_dict()
+        data: dict = super().to_dict()
         data["type"] = self.PRODUCT_TYPE
         data["weight"] = self.__weight
         return data
 
     @classmethod
-    def from_dict(cls, data: dict) -> "PhysicalProduct":
+    def from_dict(cls, data: dict) -> PhysicalProduct:
         return cls(data["id"], data["name"], data["price"], data["stock"],
                    Supplier.from_dict(data["supplier"]), data["weight"])
 
 
 # ==================== DigitalProduct Class (inherits from Product) ====================
 class DigitalProduct(Product):
-    PRODUCT_TYPE = "digital"
+    PRODUCT_TYPE: str = "digital"
 
     def __init__(self, product_id: str, name: str, price: float,
                  stock_quantity: int, supplier: Supplier, download_size: float) -> None:
@@ -154,13 +154,13 @@ class DigitalProduct(Product):
         return "This product is delivered digitally as a download (" + format(self.__download_size, ".2f") + " MB)."
 
     def to_dict(self) -> dict:
-        data = super().to_dict()
+        data: dict = super().to_dict()
         data["type"] = self.PRODUCT_TYPE
         data["download_size"] = self.__download_size
         return data
 
     @classmethod
-    def from_dict(cls, data: dict) -> "DigitalProduct":
+    def from_dict(cls, data: dict) -> DigitalProduct:
         return cls(data["id"], data["name"], data["price"], data["stock"],
                    Supplier.from_dict(data["supplier"]), data["download_size"])
 
@@ -170,11 +170,14 @@ class DigitalProduct(Product):
 #and can exist on their own - removing them from (or deleting) the Inventory does not destroy them
 class Inventory:
     def __init__(self) -> None:
-        #Typed with the base class Product, so the list can hold PhysicalProduct and DigitalProduct objects
+        #Typed with the base class Product, not PhysicalProduct or DigitalProduct:
+        #the Inventory only uses what every Product has (ID, display_information, to_dict...),
+        #so it can hold any kind of Product - including new subclasses added later - without being changed
         self.products: list[Product] = []
 
     # Add an existing Product object (the Inventory only stores a reference to it)
     # Returns True if added, False if a product with the same ID already exists
+    # (returns bool rather than None so the caller can tell whether the add worked)
     def add_product(self, product: Product) -> bool:
         if self.find_product(product.get_product_id()) is not None:
             return False
@@ -246,6 +249,7 @@ class Order:
     # but the Product it referred to is not affected
     # Returns True if removed, False if the order has no line for that product
     def remove_order_line(self, product_id: str) -> bool:
+        order_line: OrderLine
         for order_line in self.order_lines:
             if order_line.product.get_product_id().upper() == product_id.upper():
                 self.order_lines.remove(order_line)
