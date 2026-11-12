@@ -290,10 +290,18 @@ class BulkDiscount(DiscountStrategy):
 #Composition: an Order creates and owns its OrderLine objects - they are made inside the Order
 #and only exist as part of it. The Products they refer to are NOT owned by the Order
 #(they exist independently and may also be in an Inventory)
+#Strategy: the Order is GIVEN a DiscountStrategy and asks it to apply the discount -
+#it has no if/elif logic about discount types
 class Order:
-    def __init__(self, order_id: str) -> None:
+    def __init__(self, order_id: str, discount: DiscountStrategy | None = None) -> None:
         self.order_id: str = order_id
         self.order_lines: list[OrderLine] = []
+        #No strategy given -> NoDiscount (a new object for each Order, not one shared default)
+        self.discount: DiscountStrategy = discount if discount is not None else NoDiscount()
+
+    # Change the discount strategy later
+    def set_discount(self, discount: DiscountStrategy) -> None:
+        self.discount = discount
 
     # Takes a Product and quantity, and creates the OrderLine internally
     def add_order_line(self, product: Product, quantity: int) -> None:
@@ -311,12 +319,10 @@ class Order:
                 return True
         return False
 
-    # Asks each OrderLine for its own subtotal and adds them up
+    # Adds up the OrderLine subtotals, then passes the result to the discount strategy
     def calculate_total(self) -> float:
-        total: float = 0.0
-        for order_line in self.order_lines:
-            total += order_line.calculate_subtotal()
-        return total
+        total = sum(line.calculate_subtotal() for line in self.order_lines)
+        return self.discount.apply(total)
 
     def display_order(self) -> None:
         print("Order " + self.order_id)
