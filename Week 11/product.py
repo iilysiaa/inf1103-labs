@@ -235,6 +235,57 @@ class OrderLine:
         return self.product.get_price() * self.quantity
 
 
+# ==================== Discount Strategies (Strategy pattern) ====================
+#Each discount rule is its own class with the same apply() method,
+#so a new discount (e.g. a student discount) is added as a NEW class
+class DiscountStrategy(ABC):
+    # Takes the order total and returns the discounted total
+    @abstractmethod
+    def apply(self, total: float) -> float:
+        pass
+
+
+class NoDiscount(DiscountStrategy):
+    # Returns the total unchanged
+    def apply(self, total: float) -> float:
+        return total
+
+
+class PercentageDiscount(DiscountStrategy):
+    # e.g. PercentageDiscount(10) takes 10% off
+    def __init__(self, percentage: float) -> None:
+        if percentage < 0 or percentage > 100:
+            raise ValueError("Percentage must be between 0 and 100.")
+        self.__percentage: float = percentage
+
+    def get_percentage(self) -> float:
+        return self.__percentage
+
+    def apply(self, total: float) -> float:
+        return total * (1 - self.__percentage / 100)
+
+
+class BulkDiscount(DiscountStrategy):
+    # e.g. BulkDiscount(200, 20) takes 20 off any total of 200 or more
+    def __init__(self, threshold: float, amount: float) -> None:
+        if threshold < 0 or amount < 0:
+            raise ValueError("Threshold and amount cannot be negative.")
+        self.__threshold: float = threshold
+        self.__amount: float = amount
+
+    def get_threshold(self) -> float:
+        return self.__threshold
+
+    def get_amount(self) -> float:
+        return self.__amount
+
+    def apply(self, total: float) -> float:
+        if total >= self.__threshold:
+            #Never return a negative total, even if the amount is larger than the total
+            return max(total - self.__amount, 0.0)
+        return total
+
+
 # ==================== Order Class ====================
 #Composition: an Order creates and owns its OrderLine objects - they are made inside the Order
 #and only exist as part of it. The Products they refer to are NOT owned by the Order
