@@ -49,6 +49,20 @@ for product in inventory.products:
     show_product_details(product)
 print()
 
+# The loop from the brief: no isinstance checks - Python runs each object's own implementation
+print("4. Looping over inventory.products directly")
+print("-" * 45)
+for product in inventory.products:
+    product.display_information()
+    print(product.get_fulfilment_info())
+print()
+fulfilment = [product.get_fulfilment_info() for product in inventory.products]
+check("laptop ran PhysicalProduct's get_fulfilment_info()", "physical shipping" in fulfilment[0])
+check("game ran DigitalProduct's get_fulfilment_info()", "delivered digitally" in fulfilment[1])
+check("same method name, different implementation chosen by the object",
+      type(laptop).get_fulfilment_info is not type(game).get_fulfilment_info)
+print()
+
 # to_list() asks each product for its own dictionary, so each keeps its own extra field
 data = inventory.to_list()
 check("to_list() includes the laptop's weight", data[0]["weight"] == 1.24)
