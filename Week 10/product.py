@@ -213,3 +213,16 @@ class Inventory:
         for product in self.products:
             result.append(product.to_dict())
         return result
+
+
+# ==================== OrderLine Class ====================
+#One line of an order: a reference to a Product and how many of it were requested
+#The OrderLine does not create or own the Product, it only refers to an existing one
+class OrderLine:
+    def __init__(self, product: Product, quantity: int) -> None:
+        self.product: Product = product
+        self.quantity: int = quantity
+
+    # Price is a private attribute of Product, so it is read through get_price()
+    def calculate_subtotal(self) -> float:
+        return self.product.get_price() * self.quantity
