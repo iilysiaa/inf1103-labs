@@ -81,7 +81,7 @@
 <text x="28.0" y="187.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ add_product(product: Product): Boolean</text>
 <text x="28.0" y="205.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ remove_product(product_id: String): Boolean</text>
 <text x="28.0" y="223.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ find_product(product_id: String): Product [0..1]</text>
-<text x="28.0" y="241.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_all(): void</text>
+<text x="28.0" y="241.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ display_all_products(): void</text>
 <text x="28.0" y="259.0" font-family="Consolas, 'Courier New', monospace" font-size="12.5" font-weight="normal" text-anchor="start" xml:space="preserve">+ to_list(): Dictionary [0..*]</text>
 <rect x="20.0" y="382" width="350.3" height="138" fill="#fffbe6" stroke="#222" stroke-width="1.4"/>
 <rect x="20.0" y="382" width="350.3" height="34" fill="#ffe9a8" stroke="#222" stroke-width="1.4"/>

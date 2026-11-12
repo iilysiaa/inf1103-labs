@@ -26,7 +26,7 @@ inventory = Inventory()
 inventory.add_product(laptop)
 inventory.add_product(game)
 inventory.add_product(gift_card)
-inventory.display_all()
+inventory.display_all_products()
 
 print("Checks")
 print("-" * 45)

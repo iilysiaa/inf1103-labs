@@ -203,12 +203,13 @@ class Inventory:
                 return product
         return None
 
-    def display_all(self) -> None:
+    def display_all_products(self) -> None:
         print("Current Inventory")
         print("-" * 45)
         if len(self.products) == 0:
             print("No products in inventory.")
-        #Polymorphism: each product displays itself, the Inventory just asks it to
+        #Polymorphism: the Inventory does not check whether a product is Physical or Digital -
+        #it asks each Product to display itself, and the object runs its own display_information()
         for product in self.products:
             product.display_information()
             print("-" * 45)

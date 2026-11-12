@@ -14,7 +14,7 @@ game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
 inventory = Inventory()
 inventory.add_product(laptop)
 inventory.add_product(game)
-inventory.display_all()
+inventory.display_all_products()
 print()
 
 print("Collection check")
