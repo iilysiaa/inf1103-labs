@@ -226,3 +226,25 @@ class OrderLine:
     # Price is a private attribute of Product, so it is read through get_price()
     def calculate_subtotal(self) -> float:
         return self.product.get_price() * self.quantity
+
+
+# ==================== Order Class ====================
+#Composition: an Order creates and owns its OrderLine objects - they are made inside the Order
+#and only exist as part of it. The Products they refer to are NOT owned by the Order
+#(they exist independently and may also be in an Inventory)
+class Order:
+    def __init__(self, order_id: str) -> None:
+        self.order_id: str = order_id
+        self.order_lines: list[OrderLine] = []
+
+    # Takes a Product and quantity, and creates the OrderLine internally
+    def add_order_line(self, product: Product, quantity: int) -> None:
+        order_line = OrderLine(product, quantity)
+        self.order_lines.append(order_line)
+
+    # Asks each OrderLine for its own subtotal and adds them up
+    def calculate_total(self) -> float:
+        total: float = 0.0
+        for order_line in self.order_lines:
+            total += order_line.calculate_subtotal()
+        return total
