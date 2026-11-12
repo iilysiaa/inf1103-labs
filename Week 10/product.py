@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import os
 from abc import ABC, abstractmethod
@@ -161,3 +163,43 @@ class DigitalProduct(Product):
     def from_dict(cls, data: dict) -> "DigitalProduct":
         return cls(data["id"], data["name"], data["price"], data["stock"],
                    Supplier.from_dict(data["supplier"]), data["download_size"])
+
+
+# ==================== Inventory Class ====================
+#Aggregation: an Inventory groups Product objects, but the products are created outside
+#and can exist on their own - removing them from (or deleting) the Inventory does not destroy them
+class Inventory:
+    def __init__(self) -> None:
+        #Typed with the base class Product, so the list can hold PhysicalProduct and DigitalProduct objects
+        self.products: list[Product] = []
+
+    # Returns True if added, False if a product with the same ID already exists
+    def add_product(self, product: Product) -> bool:
+        if self.search_product(product.get_product_id()) is not None:
+            return False
+        self.products.append(product)
+        return True
+
+    # Find a Product by its ID (not case-sensitive), or None if not found
+    def search_product(self, product_id: str) -> Product | None:
+        for product in self.products:
+            if product.get_product_id().upper() == product_id.upper():
+                return product
+        return None
+
+    def display_all(self) -> None:
+        print("Current Inventory")
+        print("-" * 45)
+        if len(self.products) == 0:
+            print("No products in inventory.")
+        #Polymorphism: each product displays itself, the Inventory just asks it to
+        for product in self.products:
+            product.display_information()
+            print("-" * 45)
+
+    # Returns the products as a list of dictionaries (used when saving to JSON)
+    def to_list(self) -> list[dict]:
+        result: list[dict] = []
+        for product in self.products:
+            result.append(product.to_dict())
+        return result
