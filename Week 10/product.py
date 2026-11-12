@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from abc import ABC, abstractmethod
+from typing import Any
 
 class Supplier:
     def __init__(self, supplier_id: str, name: str, contact_email: str) -> None:
@@ -22,11 +23,11 @@ class Supplier:
     def display_information(self) -> None:
         print("Supplier ID: " + self.__supplier_id + " | Name: " + self.__name + " | Email: " + self.__contact_email)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, str]:
         return {"supplier_id": self.__supplier_id, "name": self.__name, "contact_email": self.__contact_email}
 
     @classmethod
-    def from_dict(cls, data: dict) -> Supplier:
+    def from_dict(cls, data: dict[str, str]) -> Supplier:
         return cls(data["supplier_id"], data["name"], data["contact_email"])
 
 
@@ -75,7 +76,9 @@ class Product(ABC):
         self.supplier.display_information()
 
     # Convert the product back to a dictionary so it can be saved as JSON
-    def to_dict(self) -> dict:
+    # dict[str, Any]: the keys are always str, but the values have different types per key
+    # (str for "id", float for "price", int for "stock", a dict for "supplier"), which is what JSON data looks like
+    def to_dict(self) -> dict[str, Any]:
         return {"id": self.__product_id, "name": self.__name, "price": self.__price,
                 "stock": self.__stock, "supplier": self.supplier.to_dict()}
 
@@ -120,14 +123,14 @@ class PhysicalProduct(Product, CanBeShipped):
     def calculate_shipping_cost(self) -> float:
         return self.BASE_SHIPPING_FEE + self.SHIPPING_FEE_PER_KG * self.__weight
 
-    def to_dict(self) -> dict:
-        data: dict = super().to_dict()
+    def to_dict(self) -> dict[str, Any]:
+        data: dict[str, Any] = super().to_dict()
         data["type"] = self.PRODUCT_TYPE
         data["weight"] = self.__weight
         return data
 
     @classmethod
-    def from_dict(cls, data: dict) -> PhysicalProduct:
+    def from_dict(cls, data: dict[str, Any]) -> PhysicalProduct:
         return cls(data["id"], data["name"], data["price"], data["stock"],
                    Supplier.from_dict(data["supplier"]), data["weight"])
 
@@ -153,14 +156,14 @@ class DigitalProduct(Product):
     def get_fulfilment_info(self) -> str:
         return "This product is delivered digitally as a download (" + format(self.__download_size, ".2f") + " MB)."
 
-    def to_dict(self) -> dict:
-        data: dict = super().to_dict()
+    def to_dict(self) -> dict[str, Any]:
+        data: dict[str, Any] = super().to_dict()
         data["type"] = self.PRODUCT_TYPE
         data["download_size"] = self.__download_size
         return data
 
     @classmethod
-    def from_dict(cls, data: dict) -> DigitalProduct:
+    def from_dict(cls, data: dict[str, Any]) -> DigitalProduct:
         return cls(data["id"], data["name"], data["price"], data["stock"],
                    Supplier.from_dict(data["supplier"]), data["download_size"])
 
@@ -211,8 +214,8 @@ class Inventory:
             print("-" * 45)
 
     # Returns the products as a list of dictionaries (used when saving to JSON)
-    def to_list(self) -> list[dict]:
-        result: list[dict] = []
+    def to_list(self) -> list[dict[str, Any]]:
+        result: list[dict[str, Any]] = []
         for product in self.products:
             result.append(product.to_dict())
         return result
