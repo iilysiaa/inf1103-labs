@@ -286,6 +286,14 @@ class BulkDiscount(DiscountStrategy):
         return total
 
 
+class StudentDiscount(DiscountStrategy):
+    # A fixed 5% off for students - no value is passed in, the rate is part of the rule
+    STUDENT_PERCENTAGE: float = 5.0
+
+    def apply(self, total: float) -> float:
+        return total * (1 - self.STUDENT_PERCENTAGE / 100)
+
+
 # ==================== Order Class ====================
 #Composition: an Order creates and owns its OrderLine objects - they are made inside the Order
 #and only exist as part of it. The Products they refer to are NOT owned by the Order
