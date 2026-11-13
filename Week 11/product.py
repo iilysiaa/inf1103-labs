@@ -38,6 +38,12 @@ class Supplier:
 class Product(ABC):
     def __init__(self, product_id: str, name: str, price: float,
                  stock_quantity: int, supplier: Supplier) -> None:
+        #Validation: the Product owns its price and stock rules, so it checks them before storing anything
+        #(both subclasses call this constructor through super(), so they get the same checks)
+        if price <= 0:
+            raise ValueError("Price must be greater than zero.")
+        if stock_quantity < 0:
+            raise ValueError("Stock quantity cannot be negative.")
         #Private attributes (name mangling) - outside code should use the methods below
         self.__product_id: str = product_id
         self.__name: str = name
@@ -248,6 +254,9 @@ class Inventory:
 #The OrderLine does not create or own the Product, it only refers to an existing one
 class OrderLine:
     def __init__(self, product: Product, quantity: int) -> None:
+        #Validation: the OrderLine protects its own quantity, so no caller has to remember to check it
+        if quantity <= 0:
+            raise ValueError("Quantity must be greater than zero.")
         self.product: Product = product
         self.quantity: int = quantity
 

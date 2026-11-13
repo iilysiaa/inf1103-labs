@@ -23,7 +23,7 @@ laptop_line = OrderLine(laptop, 2)
 game_line = OrderLine(game, 3)
 check_subtotal(laptop_line, 9000.0)
 check_subtotal(game_line, 119.7)
-check_subtotal(OrderLine(game, 0), 0.0)
+check_subtotal(OrderLine(game, 1), 39.9)
 print()
 
 print("OrderLine refers to the existing Product (not a copy)")
