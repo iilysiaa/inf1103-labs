@@ -1,7 +1,7 @@
 #External code to test the new StudentDiscount strategy
 #Open/Closed Principle: StudentDiscount is a NEW class - Order was not changed to support it
 
-from product import Supplier, PhysicalProduct, DigitalProduct, Order, DiscountStrategy, StudentDiscount
+from product import Supplier, ProductFactory, Order, DiscountStrategy, StudentDiscount
 
 
 # Print PASS/FAIL for a True/False check
@@ -24,8 +24,8 @@ print()
 
 # 2. The existing Order uses it without any change
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
-mouse = PhysicalProduct("2002", "Wireless Mouse", 59.0, 75, supplier, 0.1)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+mouse = ProductFactory.create("physical", "2002", "Wireless Mouse", 59.0, 75, supplier, weight=0.1)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 
 print("2. Order created with StudentDiscount()")
 print("-" * 45)

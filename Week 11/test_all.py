@@ -10,7 +10,8 @@ import os
 import re
 from contextlib import redirect_stdout
 
-from product import Supplier, Product, PhysicalProduct, DigitalProduct, Inventory, OrderLine, Order
+from product import (Supplier, ProductFactory, Product, PhysicalProduct,
+                     DigitalProduct, Inventory, OrderLine, Order)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 results: list[bool] = []
@@ -42,8 +43,8 @@ def make_supplier() -> Supplier:
 section("1. Supplier and Product: association, both exist independently")
 supplier = make_supplier()
 check("Supplier can be created with no Product", isinstance(supplier, Supplier))
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 check("Product and Supplier are different objects", laptop is not supplier)
 check("one Supplier can supply many Products", laptop.supplier is game.supplier)
 kept = laptop.supplier
@@ -55,7 +56,7 @@ check("Supplier still exists after a Product is deleted", game.supplier is kept)
 # ---------------------------------------------------------------------------
 section("2. Product stores a reference to its Supplier (not a copy, name or ID)")
 supplier = make_supplier()
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
 check("product.supplier is the same Supplier object", laptop.supplier is supplier)
 check("product.supplier is a Supplier, not a str", isinstance(laptop.supplier, Supplier))
 output = capture(laptop.display_supplier_information)
@@ -63,7 +64,7 @@ check("Product can display its supplier's details", "sales@techworld.com" in out
 
 # ---------------------------------------------------------------------------
 section("3. Inventory aggregates Product objects")
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 inventory = Inventory()
 check("add_product returns True", inventory.add_product(laptop) is True)
 inventory.add_product(game)
@@ -221,8 +222,8 @@ for relationship in ["manages", "contains", "refers to", "supplied by", "inherit
 # ---------------------------------------------------------------------------
 section("10. Inventory works with both subclasses through the Product abstraction")
 inventory = Inventory()
-mouse = PhysicalProduct("2002", "Wireless Mouse", 59.0, 75, supplier, 0.1)
-ebook = DigitalProduct("3002", "Python Crash Course", 29.5, 100, supplier, 12.0)
+mouse = ProductFactory.create("physical", "2002", "Wireless Mouse", 59.0, 75, supplier, weight=0.1)
+ebook = ProductFactory.create("digital", "3002", "Python Crash Course", 29.5, 100, supplier, download_size=12.0)
 for product in (mouse, ebook):
     inventory.add_product(product)
 check("one collection holds both product types", {type(p) for p in inventory.products} == {PhysicalProduct, DigitalProduct})
@@ -239,8 +240,8 @@ check("Inventory code never names PhysicalProduct or DigitalProduct",
 
 # ---------------------------------------------------------------------------
 section("11. Both subclasses preserve Product's expected behaviour (LSP)")
-for product in (PhysicalProduct("2003", "Keyboard", 99.0, 10, supplier, 0.8),
-                DigitalProduct("3003", "Antivirus", 49.0, 10, supplier, 300.0)):
+for product in (ProductFactory.create("physical", "2003", "Keyboard", 99.0, 10, supplier, weight=0.8),
+                ProductFactory.create("digital", "3003", "Antivirus", 49.0, 10, supplier, download_size=300.0)):
     name = type(product).__name__
     check(name + ": update_stock(7) -> True and stock is 7", product.update_stock(7) is True and product.get_stock() == 7)
     check(name + ": update_stock(0) -> True", product.update_stock(0) is True)

@@ -1,4 +1,4 @@
-from product import Supplier, Product, PhysicalProduct, DigitalProduct, Inventory
+from product import Supplier, ProductFactory, Product, PhysicalProduct, DigitalProduct, Inventory
 
 
 # Print PASS/FAIL for a True/False check
@@ -21,8 +21,8 @@ def check_update_stock_contract(product: Product) -> None:
 
 
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 
 # 1. Both subclasses keep the update_stock() expectation set by Product
 print("1. PhysicalProduct keeps the update_stock() expectation")

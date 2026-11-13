@@ -8,13 +8,13 @@
 #RESULT (after running): ...
 #  Did it match? If not, why: ...
 
-from product import Supplier, PhysicalProduct, DigitalProduct, Inventory
+from product import Supplier, ProductFactory, Inventory
 
 
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
 
 # 1. Create a Product BEFORE any Inventory exists
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
 print("1. Product created before any Inventory")
 print("-" * 45)
 laptop.display_information()
@@ -50,7 +50,7 @@ print("Stock change from step 3 is visible through B: " + str(inventory_b.find_p
 print()
 
 # 5. Empty an inventory - the products are not destroyed
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 inventory_b.add_product(game)
 inventory_b.remove_product("2001")
 inventory_b.remove_product("3001")

@@ -7,15 +7,15 @@
 #RESULT (after running): ...
 #  Did it match? If not, why: ...
 
-from product import Supplier, PhysicalProduct, DigitalProduct
+from product import Supplier, ProductFactory, PhysicalProduct, DigitalProduct
 
 
 # 1. Create a Supplier object on its own
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
 
 # 2. Create a PhysicalProduct and a DigitalProduct, passing in that same Supplier object
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 
 # 3. Display the supplier information through each Product
 print("Supplier information through each Product")

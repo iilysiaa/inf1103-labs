@@ -2,7 +2,7 @@
 #show_product_details() accepts ANY Product and only uses behaviour every Product supports,
 #so it works for PhysicalProduct and DigitalProduct without being changed
 
-from product import Supplier, Product, PhysicalProduct, DigitalProduct, Inventory
+from product import Supplier, ProductFactory, Product, PhysicalProduct, DigitalProduct, Inventory
 
 
 # Accepts any Product - it does not check which subclass it was given
@@ -17,8 +17,8 @@ def check(description: str, condition: bool) -> None:
 
 
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 
 # 1. The same function works for both product types
 print("1. show_product_details() with a PhysicalProduct")

@@ -168,6 +168,27 @@ class DigitalProduct(Product):
                    Supplier.from_dict(data["supplier"]), data["download_size"])
 
 
+# ==================== ProductFactory (Factory pattern) ====================
+#The one place that decides WHICH Product subclass to create from a product type string.
+#Other code asks the factory for a Product instead of calling PhysicalProduct(...) / DigitalProduct(...) itself.
+#weight is only used for physical products and download_size only for digital products.
+class ProductFactory:
+    @staticmethod
+    def create(product_type: str, product_id: str, name: str, price: float,
+               stock_quantity: int, supplier: Supplier,
+               weight: float | None = None, download_size: float | None = None) -> Product:
+        if product_type == PhysicalProduct.PRODUCT_TYPE:
+            if weight is None:
+                raise ValueError("A physical product needs a weight.")
+            return PhysicalProduct(product_id, name, price, stock_quantity, supplier, weight)
+        elif product_type == DigitalProduct.PRODUCT_TYPE:
+            if download_size is None:
+                raise ValueError("A digital product needs a download size.")
+            return DigitalProduct(product_id, name, price, stock_quantity, supplier, download_size)
+        else:
+            raise ValueError(f"Unknown product type: {product_type}")
+
+
 # ==================== Inventory Class ====================
 #Aggregation: an Inventory groups Product objects, but the products are created outside
 #and can exist on their own - removing them from (or deleting) the Inventory does not destroy them

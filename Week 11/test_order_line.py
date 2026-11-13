@@ -1,12 +1,12 @@
 #External code to test the OrderLine class
 #An OrderLine refers to an existing Product and calculates price * quantity
 
-from product import Supplier, PhysicalProduct, DigitalProduct, OrderLine
+from product import Supplier, ProductFactory, OrderLine
 
 
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
 
 
 # Print PASS/FAIL comparing the actual subtotal with the expected one

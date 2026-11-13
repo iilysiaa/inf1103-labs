@@ -11,7 +11,7 @@
 #
 #WHY an OrderLine should not be managed independently or moved to another Order: ...
 
-from product import Supplier, PhysicalProduct, DigitalProduct, Order
+from product import Supplier, ProductFactory, Order
 
 
 # Print PASS/FAIL for a True/False check
@@ -20,9 +20,9 @@ def check(description, condition):
 
 
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
-laptop = PhysicalProduct("2001", "MacBook Air", 4500.0, 20, supplier, 1.24)
-game = DigitalProduct("3001", "Minecraft", 39.9, 500, supplier, 1024.5)
-ebook = DigitalProduct("3002", "Python Crash Course", 29.5, 100, supplier, 12.0)
+laptop = ProductFactory.create("physical", "2001", "MacBook Air", 4500.0, 20, supplier, weight=1.24)
+game = ProductFactory.create("digital", "3001", "Minecraft", 39.9, 500, supplier, download_size=1024.5)
+ebook = ProductFactory.create("digital", "3002", "Python Crash Course", 29.5, 100, supplier, download_size=12.0)
 
 # 1. Create an Order and add products with add_order_line() - the Order creates the OrderLines
 order_1 = Order("ORD001")
