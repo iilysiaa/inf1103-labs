@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 import math
 import os
@@ -393,3 +394,48 @@ def get_positive_float(prompt: str) -> float:
             return value
         except ValueError:
             print("Please enter a valid number, e.g. 12.50")
+
+
+# ==================== Loading Products from CSV ====================
+# Expected columns (header row first):
+#   type,product_id,name,price,stock_quantity,weight,download_size
+# weight is filled in for physical products and download_size for digital products; the other is left blank, e.g.
+#   physical,2001,MacBook Air,4500.00,20,1.24,
+#   digital,3001,Minecraft,39.90,500,,1024.5
+def load_products(path: str, inventory: Inventory, supplier: Supplier) -> None:
+    try:
+        file = open(path, newline="")
+    except FileNotFoundError:
+        #No file -> report it and return normally (the program does not crash)
+        print(f"Products file not found: {path}")
+    else:
+        #Only runs if the file opened; "with" closes the file when reading is done
+        with file:
+            reader = csv.reader(file)
+            next(reader, None)                      # skip the header row
+            loaded = 0
+            for row_number, row in enumerate(reader, start=2):
+                if not row:                          # ignore blank lines
+                    continue
+                #Each row gets its own try, so one bad row is skipped and loading carries on
+                try:
+                    product_type, product_id, name, price, stock_quantity, weight, download_size = row
+                    product = ProductFactory.create(
+                        product_type.strip(), product_id.strip(), name.strip(),
+                        float(price), int(stock_quantity), supplier,
+                        weight=float(weight) if weight.strip() else None,
+                        download_size=float(download_size) if download_size.strip() else None)
+                except ValueError as error:
+                    #ValueError covers: unknown type (factory), price/stock not a number (float/int),
+                    #price <= 0 or negative stock (Product validation), missing weight/download size
+                    #(factory) and a row with the wrong number of columns (unpacking)
+                    print(f"Row {row_number} skipped: {error}")
+                    continue
+                if inventory.add_product(product):
+                    loaded += 1
+                else:
+                    print(f"Row {row_number} skipped: product ID {product.get_product_id()} already exists.")
+            print(f"{loaded} products loaded.")
+    finally:
+        #Runs in every case: file missing, file loaded, or an unexpected error
+        print("Load attempt finished.")
