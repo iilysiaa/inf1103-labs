@@ -8,7 +8,7 @@ from contextlib import redirect_stdout
 
 from product import Supplier, Inventory, PhysicalProduct, DigitalProduct, load_products
 
-HEADER = "type,product_id,name,price,stock_quantity,weight,download_size\n"
+HEADER = "product_type,product_id,name,price,stock_quantity,weight,download_size\n"
 supplier = Supplier("S001", "TechWorld Distributors", "sales@techworld.com")
 
 
@@ -72,8 +72,8 @@ inventory, lines = load_from_text(HEADER
                                   + "physical,2003,Monitor,-5,10,3.0,\n"             # row 5  price <= 0
                                   + "digital,3002,Antivirus,49.00,-1,,300\n"         # row 6  negative stock
                                   + "digital,3003,Game,20.00,ten,,500\n"             # row 7  stock not a number
-                                  + "physical,2004,Desk,150.00,5,,\n"                # row 8  missing weight
-                                  + "digital,3004,Too Short,10.00\n"                 # row 9  wrong number of columns
+                                  + "physical,2004,Desk,150.00,5,heavy,\n"           # row 8  weight not a number
+                                  + "digital,3004,Too Short,10.00\n"                 # row 9  too few columns
                                   + "physical,2001,Duplicate ID,99.00,1,1.0,\n"      # row 10 duplicate ID
                                   + "\n"                                             # row 11 blank line, ignored
                                   + "digital,3001,Minecraft,39.90,500,,1024.5\n")    # row 12 valid
@@ -85,26 +85,43 @@ check("rows are numbered as in the file (row 3 is the unknown type)", skipped[0]
 check("price 'abc' reported", any(l.startswith("Row 4 skipped") and "abc" in l for l in skipped))
 check("price -5 reported with the Product's validation message", "Row 5 skipped: Price must be greater than zero." in skipped)
 check("negative stock reported", "Row 6 skipped: Stock quantity cannot be negative." in skipped)
-check("missing weight reported", "Row 8 skipped: A physical product needs a weight." in skipped)
-check("wrong number of columns reported", any(l.startswith("Row 9 skipped") for l in skipped))
+check("weight that is not a number reported", any(l.startswith("Row 8 skipped") and "heavy" in l for l in skipped))
+check("too few columns reported", "Row 9 skipped: expected 5 to 7 columns, got 4" in skipped)
 check("duplicate ID reported", "Row 10 skipped: product ID 2001 already exists." in skipped)
 check("the valid row AFTER the bad rows still loaded", inventory.find_product("3001") is not None)
 check("prints '2 products loaded.'", "2 products loaded." in lines)
 check("'Load attempt finished.' is the last line", lines[-1] == "Load attempt finished.")
 print()
 
-# 4. Header only -> nothing to load
-print("4. File with only a header row")
+# 4. Only the 5 required columns -> weight / download size default to 0.0
+print("4. Rows with only the 5 required columns")
+print("-" * 45)
+inventory, lines = load_from_text("product_type,product_id,name,price,stock_quantity\n"
+                                  + "physical,P001,Desk Lamp,25.00,10\n"
+                                  + "digital,D001,Photo Editor,49.90,100\n"
+                                  + "physical,P009,Too Many,10.00,1,1.0,2.0,extra\n")
+check("2 products loaded", "2 products loaded." in lines)
+check("physical with no weight column -> weight 0.0", inventory.find_product("P001").get_weight() == 0.0)
+check("digital with no download_size column -> 0.0", inventory.find_product("D001").get_download_size() == 0.0)
+check("a row with 8 columns is skipped", "Row 4 skipped: expected 5 to 7 columns, got 8" in lines)
+print()
+
+# 5. Header only -> nothing to load
+print("5. File with only a header row")
 print("-" * 45)
 inventory, lines = load_from_text(HEADER)
 check("prints '0 products loaded.' then 'Load attempt finished.'",
       lines == ["0 products loaded.", "Load attempt finished."])
 print()
 
-# 5. The sample products.csv in this folder
-print("5. Sample products.csv")
+# 6. The products.csv in this folder (5 columns: no weight / download size)
+print("6. products.csv")
 print("-" * 45)
 inventory, lines = load_from_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "products.csv"))
 for line in lines:
     print("    output: " + line)
-check("4 products loaded from products.csv", "4 products loaded." in lines and len(inventory.products) == 4)
+check("3 products loaded: P001, D001, P003",
+      "3 products loaded." in lines and [p.get_product_id() for p in inventory.products] == ["P001", "D001", "P003"])
+check("'service' row skipped", "Row 4 skipped: Unknown product type: service" in lines)
+check("price 'abc' row skipped", any(l.startswith("Row 5 skipped") and "abc" in l for l in lines))
+check("'Load attempt finished.' is the last line", lines[-1] == "Load attempt finished.")

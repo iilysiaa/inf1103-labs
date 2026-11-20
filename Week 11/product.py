@@ -397,11 +397,23 @@ def get_positive_float(prompt: str) -> float:
 
 
 # ==================== Loading Products from CSV ====================
-# Expected columns (header row first):
-#   type,product_id,name,price,stock_quantity,weight,download_size
-# weight is filled in for physical products and download_size for digital products; the other is left blank, e.g.
-#   physical,2001,MacBook Air,4500.00,20,1.24,
-#   digital,3001,Minecraft,39.90,500,,1024.5
+# Columns (header row first) - the first 5 are required, the last 2 are optional:
+#   product_type,product_id,name,price,stock_quantity[,weight,download_size]
+# e.g.  physical,P001,Desk Lamp,25.00,10            <- no weight given -> weight 0.0
+#       physical,2001,MacBook Air,4500.00,20,1.24,  <- weight 1.24
+#       digital,3001,Minecraft,39.90,500,,1024.5    <- download size 1024.5
+# A missing or blank weight / download size is loaded as 0.0
+REQUIRED_COLUMNS: int = 5
+ALL_COLUMNS: int = 7
+
+
+# Read an optional number column: missing or blank -> 0.0
+def optional_float(row: list[str], index: int) -> float:
+    if index < len(row) and row[index].strip():
+        return float(row[index])
+    return 0.0
+
+
 def load_products(path: str, inventory: Inventory, supplier: Supplier) -> None:
     try:
         file = open(path, newline="")
@@ -419,16 +431,17 @@ def load_products(path: str, inventory: Inventory, supplier: Supplier) -> None:
                     continue
                 #Each row gets its own try, so one bad row is skipped and loading carries on
                 try:
-                    product_type, product_id, name, price, stock_quantity, weight, download_size = row
+                    if not REQUIRED_COLUMNS <= len(row) <= ALL_COLUMNS:
+                        raise ValueError(f"expected {REQUIRED_COLUMNS} to {ALL_COLUMNS} columns, got {len(row)}")
+                    product_type, product_id, name, price, stock_quantity = row[:REQUIRED_COLUMNS]
                     product = ProductFactory.create(
                         product_type.strip(), product_id.strip(), name.strip(),
                         float(price), int(stock_quantity), supplier,
-                        weight=float(weight) if weight.strip() else None,
-                        download_size=float(download_size) if download_size.strip() else None)
+                        weight=optional_float(row, 5),
+                        download_size=optional_float(row, 6))
                 except ValueError as error:
-                    #ValueError covers: unknown type (factory), price/stock not a number (float/int),
-                    #price <= 0 or negative stock (Product validation), missing weight/download size
-                    #(factory) and a row with the wrong number of columns (unpacking)
+                    #ValueError covers: unknown type (factory), price/stock/weight not a number (float/int),
+                    #price <= 0 or negative stock (Product validation) and the wrong number of columns
                     print(f"Row {row_number} skipped: {error}")
                     continue
                 if inventory.add_product(product):
