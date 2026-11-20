@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 from abc import ABC, abstractmethod
 from typing import Any
@@ -371,3 +372,24 @@ class Order:
             print(order_line.product.get_name() + " | $" + format(order_line.product.get_price(), ".2f")
                   + " x " + str(order_line.quantity) + " = $" + format(order_line.calculate_subtotal(), ".2f"))
         print("Total: $" + format(self.calculate_total(), ".2f"))
+
+
+# ==================== Input Helpers ====================
+# Keep asking until the user enters a number greater than zero (e.g. a price)
+# Two kinds of bad input are handled:
+#   - text float() cannot convert ("abc", "") raises ValueError -> caught below
+#   - a number that breaks the rule (0, -5) -> rejected by the if check
+def get_positive_float(prompt: str) -> float:
+    while True:
+        try:
+            value = float(input(prompt))
+            #"nan" and "inf" convert without an error but are not real prices
+            if not math.isfinite(value):
+                print("Please enter a valid number, e.g. 12.50")
+                continue
+            if value <= 0:
+                print("Please enter a number greater than zero.")
+                continue
+            return value
+        except ValueError:
+            print("Please enter a valid number, e.g. 12.50")
