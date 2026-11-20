@@ -1,7 +1,6 @@
-type,product_id,name,price,stock_quantity,weight,download_size
-physical,2001,MacBook Air,4500.00,20,1.24,
-digital,3001,Minecraft,39.90,500,,1024.5
-physical,2002,Wireless Mouse,59.00,75,0.1,
-digital,3002,Python Crash Course,29.50,100,,12.0
-ebook,4001,Old Manual,15.00,10,,2.0
-physical,2003,Keyboard,abc,10,0.8,
+product_type,product_id,name,price,stock_quantity
+physical,P001,Desk Lamp,25.00,10
+digital,D001,Photo Editor,49.90,100
+service,S001,Installation,30.00,5
+physical,P002,Office Chair,abc,3
+physical,P003,Monitor Stand,39.50,7
